@@ -1,0 +1,52 @@
+{
+  "consensus": {
+    "authorities": {
+      "A9LB5Lt1spXnyB2/Oh01yRgZ+WFmPOmwYxz5+TwRbp4z": {
+        "stake": 1,
+        "address": "127.0.0.1:25203"
+      },
+      "A5JDDjZXlgGFqW6y0G/bu6oGdL6LukFgDMpujXeCrkf8": {
+        "stake": 1,
+        "address": "127.0.0.1:25202"
+      },
+      "AklEcEt3e4Vk6OdHsb3Enq/PW6Q273i2ZeoLj6Cn5UWA": {
+        "stake": 1,
+        "address": "127.0.0.1:25200"
+      },
+      "A9LwjDTm98cxsuxFA6PC9KG/4x2zp2oTk6OnxDTMxXZ+": {
+        "stake": 1,
+        "address": "127.0.0.1:25201"
+      }
+    },
+    "epoch": 1
+  },
+  "mempool": {
+    "authorities": {
+      "A5JDDjZXlgGFqW6y0G/bu6oGdL6LukFgDMpujXeCrkf8": {
+        "stake": 1,
+        "transactions_address": "127.0.0.1:25002",
+        "mempool_address": "127.0.0.1:25102",
+        "signature_address": "127.0.0.1:25302"
+      },
+      "AklEcEt3e4Vk6OdHsb3Enq/PW6Q273i2ZeoLj6Cn5UWA": {
+        "stake": 1,
+        "transactions_address": "127.0.0.1:25000",
+        "mempool_address": "127.0.0.1:25100",
+        "signature_address": "127.0.0.1:25300"
+      },
+      "A9LwjDTm98cxsuxFA6PC9KG/4x2zp2oTk6OnxDTMxXZ+": {
+        "stake": 1,
+        "transactions_address": "127.0.0.1:25001",
+        "mempool_address": "127.0.0.1:25101",
+        "signature_address": "127.0.0.1:25301"
+      },
+      "A9LB5Lt1spXnyB2/Oh01yRgZ+WFmPOmwYxz5+TwRbp4z": {
+        "stake": 1,
+        "transactions_address": "127.0.0.1:25003",
+        "mempool_address": "127.0.0.1:25103",
+        "signature_address": "127.0.0.1:25303"
+      }
+    },
+    "epoch": 1
+  }
+}
