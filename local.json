@@ -3,19 +3,19 @@
     "authorities": {
       "A9LB5Lt1spXnyB2/Oh01yRgZ+WFmPOmwYxz5+TwRbp4z": {
         "stake": 1,
-        "address": "18.237.8.123:25203"
+        "address": "127.0.0.1:25203"
       },
       "A5JDDjZXlgGFqW6y0G/bu6oGdL6LukFgDMpujXeCrkf8": {
         "stake": 1,
-        "address": "54.190.80.159:25202"
+        "address": "127.0.0.1:25202"
       },
       "AklEcEt3e4Vk6OdHsb3Enq/PW6Q273i2ZeoLj6Cn5UWA": {
         "stake": 1,
-        "address": "35.88.15.244:25200"
+        "address": "127.0.0.1:25200"
       },
       "A9LwjDTm98cxsuxFA6PC9KG/4x2zp2oTk6OnxDTMxXZ+": {
         "stake": 1,
-        "address": "54.244.42.209:25201"
+        "address": "127.0.0.1:25201"
       }
     },
     "epoch": 1
@@ -24,27 +24,27 @@
     "authorities": {
       "A5JDDjZXlgGFqW6y0G/bu6oGdL6LukFgDMpujXeCrkf8": {
         "stake": 1,
-        "transactions_address": "54.190.80.159:25002",
-        "mempool_address": "54.190.80.159:25102",
-        "signature_address": "54.190.80.159:25302"
+        "transactions_address": "127.0.0.1:25002",
+        "mempool_address": "127.0.0.1:25102",
+        "signature_address": "127.0.0.1:25302"
       },
       "AklEcEt3e4Vk6OdHsb3Enq/PW6Q273i2ZeoLj6Cn5UWA": {
         "stake": 1,
-        "transactions_address": "35.88.15.244:25000",
-        "mempool_address": "35.88.15.244:25100",
-        "signature_address": "35.88.15.244:25300"
+        "transactions_address": "127.0.0.1:25000",
+        "mempool_address": "127.0.0.1:25100",
+        "signature_address": "127.0.0.1:25300"
       },
       "A9LwjDTm98cxsuxFA6PC9KG/4x2zp2oTk6OnxDTMxXZ+": {
         "stake": 1,
-        "transactions_address": "54.244.42.209:25001",
-        "mempool_address": "54.244.42.209:25101",
-        "signature_address": "54.244.42.209:25301"
+        "transactions_address": "127.0.0.1:25001",
+        "mempool_address": "127.0.0.1:25101",
+        "signature_address": "127.0.0.1:25301"
       },
       "A9LB5Lt1spXnyB2/Oh01yRgZ+WFmPOmwYxz5+TwRbp4z": {
         "stake": 1,
-        "transactions_address": "18.237.8.123:25003",
-        "mempool_address": "18.237.8.123:25103",
-        "signature_address": "18.237.8.123:25303"
+        "transactions_address": "127.0.0.1:25003",
+        "mempool_address": "127.0.0.1:25103",
+        "signature_address": "127.0.0.1:25303"
       }
     },
     "epoch": 1
