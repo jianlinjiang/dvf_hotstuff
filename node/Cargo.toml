@@ -31,6 +31,5 @@ network = { path = "../network" }
 benchmark = ["consensus/benchmark", "mempool/benchmark"]
 
 [[bin]]         
-name = "client"   
-path = "src/client.rs" 
-required-features = ["benchmark"] 
+name = "dvf_client"   
+path = "src/txclient.rs" 

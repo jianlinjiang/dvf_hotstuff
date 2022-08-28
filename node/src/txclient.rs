@@ -7,16 +7,8 @@ use log::{warn};
 use std::net::SocketAddr;
 use tokio::net::TcpStream;
 use tokio_util::codec::{Framed, LengthDelimitedCodec};
+use network::DvfMessage;
 use network::ReliableSender;
-use serde::{Deserialize, Serialize};
-
-
-#[derive(Serialize, Deserialize, Clone)]
-struct testInfo {
-    id : u32,
-    msg : Vec<u8>
-}
-
 #[tokio::main]
 async fn main() -> Result<()> {
   let matches = App::new(crate_name!())
@@ -34,21 +26,31 @@ async fn main() -> Result<()> {
     .parse::<SocketAddr>()
     .context("Invalid socket address format")?;
   
-  for i in 0..100 {
+  // for i in 0..100 {
     // let mut network = SimpleSender::new();
     // let msg = testInfo {id:0, msg:vec![1,2,3]};
     // network.send(target, Bytes::from(bincode::serialize(&msg).unwrap())).await;
-
+    // let mut network = ReliableSender::new();
     let stream = TcpStream::connect(target)
     .await
     .context(format!("failed to connect to {}", target))?;
     let mut transport = Framed::new(stream, LengthDelimitedCodec::new());
-    let message = "hello worlddsfasdfnlaksdflaksdf;lkjasdfklj,mansd.,mansdf,mnasdf,mnasd,mfna.s,dmnf.asdmnf.,amsndf.,nasd,fmnas.,dmnf.,amsdnf.,amsndf,.n";
-    if let Err(e) = transport.send(Bytes::from(message)).await {
-      warn!("Failed to send transaction: {}", e);
-    } 
-    println!("{}", i);
-  }
+    // let stream = TcpStream::connect(target)
+    // .await
+    // .context(format!("failed to connect to {}", target))?;
+    // let mut transport = Framed::new(stream, LengthDelimitedCodec::new());
+    let message = "hello";
+    let dvf_message = DvfMessage { validator_id: 1, message: message.as_bytes().to_vec() };
+    let serialized_msg = bincode::serialize(&dvf_message).unwrap();
+    if let Err(e) = transport.send(Bytes::from(serialized_msg)).await {
+      warn!("Failed to send dvf command: {}", e);
+    }
+    // let _ = network.send(target, Bytes::from(serialized_msg)).await;
+    // if let Err(e) = transport.send(Bytes::from(serialized_msg)).await {
+    //   warn!("Failed to send transaction: {}", e);
+    // } 
+    // println!("{}", i);dsfasdlfk;alsdkf;alsdf
+  // }
     
   Ok(())
 }
