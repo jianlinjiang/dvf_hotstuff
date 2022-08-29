@@ -3,19 +3,19 @@
     "authorities": {
       "A9LB5Lt1spXnyB2/Oh01yRgZ+WFmPOmwYxz5+TwRbp4z": {
         "stake": 1,
-        "address": "18.237.8.123:26000"
+        "address": "18.140.173.65:26000"
       },
       "A5JDDjZXlgGFqW6y0G/bu6oGdL6LukFgDMpujXeCrkf8": {
         "stake": 1,
-        "address": "54.190.80.159:26000"
+        "address": "18.136.181.226:26000"
       },
       "AklEcEt3e4Vk6OdHsb3Enq/PW6Q273i2ZeoLj6Cn5UWA": {
         "stake": 1,
-        "address": "35.88.15.244:26000"
+        "address": "13.215.100.234:26000"
       },
       "A9LwjDTm98cxsuxFA6PC9KG/4x2zp2oTk6OnxDTMxXZ+": {
         "stake": 1,
-        "address": "54.244.42.209:26000"
+        "address": "13.215.234.178:26000"
       }
     },
     "epoch": 1
@@ -24,27 +24,27 @@
     "authorities": {
       "A5JDDjZXlgGFqW6y0G/bu6oGdL6LukFgDMpujXeCrkf8": {
         "stake": 1,
-        "transactions_address": "54.190.80.159:26001",
-        "mempool_address": "54.190.80.159:26001",
-        "signature_address": "54.190.80.159:26001"
+        "transactions_address": "18.136.181.226:26001",
+        "mempool_address": "18.136.181.226:26001",
+        "signature_address": "18.136.181.226:26001"
       },
       "AklEcEt3e4Vk6OdHsb3Enq/PW6Q273i2ZeoLj6Cn5UWA": {
         "stake": 1,
-        "transactions_address": "35.88.15.244:26002",
-        "mempool_address": "35.88.15.244:26002",
-        "signature_address": "35.88.15.244:26002"
+        "transactions_address": "13.215.100.234:26002",
+        "mempool_address": "13.215.100.234:26002",
+        "signature_address": "13.215.100.234:26002"
       },
       "A9LwjDTm98cxsuxFA6PC9KG/4x2zp2oTk6OnxDTMxXZ+": {
         "stake": 1,
-        "transactions_address": "54.244.42.209:26003",
-        "mempool_address": "54.244.42.209:26003",
-        "signature_address": "54.244.42.209:26003"
+        "transactions_address": "13.215.234.178:26003",
+        "mempool_address": "13.215.234.178:26003",
+        "signature_address": "13.215.234.178:26003"
       },
       "A9LB5Lt1spXnyB2/Oh01yRgZ+WFmPOmwYxz5+TwRbp4z": {
         "stake": 1,
-        "transactions_address": "18.237.8.123:26004",
-        "mempool_address": "18.237.8.123:26004",
-        "signature_address": "18.237.8.123:26004"
+        "transactions_address": "18.140.173.65:26004",
+        "mempool_address": "18.140.173.65:26004",
+        "signature_address": "18.140.173.65:26004"
       }
     },
     "epoch": 1
