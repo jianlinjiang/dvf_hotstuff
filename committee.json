@@ -25,26 +25,26 @@
       "A5JDDjZXlgGFqW6y0G/bu6oGdL6LukFgDMpujXeCrkf8": {
         "stake": 1,
         "transactions_address": "18.136.181.226:26001",
-        "mempool_address": "18.136.181.226:26001",
-        "signature_address": "18.136.181.226:26001"
+        "mempool_address": "18.136.181.226:26002",
+        "signature_address": "18.136.181.226:26003"
       },
       "AklEcEt3e4Vk6OdHsb3Enq/PW6Q273i2ZeoLj6Cn5UWA": {
         "stake": 1,
-        "transactions_address": "13.215.100.234:26002",
+        "transactions_address": "13.215.100.234:26001",
         "mempool_address": "13.215.100.234:26002",
-        "signature_address": "13.215.100.234:26002"
+        "signature_address": "13.215.100.234:26003"
       },
       "A9LwjDTm98cxsuxFA6PC9KG/4x2zp2oTk6OnxDTMxXZ+": {
         "stake": 1,
-        "transactions_address": "13.215.234.178:26003",
-        "mempool_address": "13.215.234.178:26003",
+        "transactions_address": "13.215.234.178:26001",
+        "mempool_address": "13.215.234.178:26002",
         "signature_address": "13.215.234.178:26003"
       },
       "A9LB5Lt1spXnyB2/Oh01yRgZ+WFmPOmwYxz5+TwRbp4z": {
         "stake": 1,
-        "transactions_address": "18.140.173.65:26004",
-        "mempool_address": "18.140.173.65:26004",
-        "signature_address": "18.140.173.65:26004"
+        "transactions_address": "18.140.173.65:26001",
+        "mempool_address": "18.140.173.65:26002",
+        "signature_address": "18.140.173.65:26003"
       }
     },
     "epoch": 1
