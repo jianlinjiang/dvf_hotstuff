@@ -150,7 +150,7 @@ impl Node {
 
             tokio::spawn(async move {
                 while let Some(block) = rx_commit.recv().await {
-                    if block.payload.is_empty() {
+                    if !block.payload.is_empty() {
                         error!("{} va {} round has transaction", i, block.round);
                     }
                 }
