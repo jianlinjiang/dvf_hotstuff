@@ -15,6 +15,7 @@ async fn main() -> Result<()> {
     .version(crate_version!())
     .about("client for HotStuff nodes.")
     .args_from_usage("<ADDR> 'The network address of the node where to send tx transaction'")
+    .args_from_usage("<ID> 'The validator id of  tx transaction'")
     .setting(AppSettings::ArgRequiredElseHelp)
     .get_matches();
   env_logger::Builder::from_env(Env::default().default_filter_or("info"))
@@ -25,7 +26,11 @@ async fn main() -> Result<()> {
     .unwrap()
     .parse::<SocketAddr>()
     .context("Invalid socket address format")?;
-  
+  let id = matches
+    .value_of("ID")
+    .unwrap()
+    .parse::<u64>()
+    .context("Invalid id format")?;
   // for i in 0..100 {
     // let mut network = SimpleSender::new();
     // let msg = testInfo {id:0, msg:vec![1,2,3]};
@@ -40,7 +45,7 @@ async fn main() -> Result<()> {
     // .context(format!("failed to connect to {}", target))?;
     // let mut transport = Framed::new(stream, LengthDelimitedCodec::new());
     let message = "hello";
-    let dvf_message = DvfMessage { validator_id: 1, message: message.as_bytes().to_vec() };
+    let dvf_message = DvfMessage { validator_id: id, message: message.as_bytes().to_vec() };
     let serialized_msg = bincode::serialize(&dvf_message).unwrap();
     if let Err(e) = transport.send(Bytes::from(serialized_msg)).await {
       warn!("Failed to send dvf command: {}", e);

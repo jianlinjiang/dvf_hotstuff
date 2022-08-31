@@ -12,12 +12,13 @@ use std::collections::HashMap;
 use tokio::sync::RwLock;
 use std::net::SocketAddr;
 use network::{Receiver as NetworkReceiver};
+use futures::future;
 /// The default channel capacity for this module.
 pub const CHANNEL_CAPACITY: usize = 1_000;
 pub const DEFAULT_GC_ROUND: u64 = 1_000_00;
 pub struct Node {
     pub commit: Receiver<Block>,
-    pub tx_store: Sender<Block>,
+    // pub tx_store: Sender<Block>,
     pub signal: exit_future::Signal
 }
 
@@ -34,10 +35,7 @@ impl Node {
         store_path: &str,
         parameters: Option<&str>,
     ) -> Result<Self, ConfigError> {
-        let (tx_commit, rx_commit) = channel(CHANNEL_CAPACITY);
-        let (tx_consensus_to_mempool, rx_consensus_to_mempool) = channel(CHANNEL_CAPACITY);
-        let (tx_mempool_to_consensus, rx_mempool_to_consensus) = channel(CHANNEL_CAPACITY);
-        let (tx_store, rx_store) = channel(CHANNEL_CAPACITY);
+        
         // Read the committee and secret key from file.
         let committee = Committee::read(committee_file)?;
         let secret = Secret::read(key_file)?;
@@ -50,12 +48,8 @@ impl Node {
             None => Parameters::default(),
         };
 
-        // Make the data store.
-        let store = Store::new(store_path).expect("Failed to create store");
-
         // Run the signature service.
-        let signature_service = SignatureService::new(secret_key);
-
+        
         let tx_handler_map = Arc::new(RwLock::new(HashMap::new()));
         let mempool_handler_map = Arc::new(RwLock::new(HashMap::new()));
         let consensus_handler_map = Arc::new(RwLock::new(HashMap::new()));
@@ -76,43 +70,103 @@ impl Node {
             secret.name, consensus_address
         );
 
+
+        let store_path = format!("db_{}", 0);
+        let store = Store::new(&store_path).expect("Failed to create store");
+        let tmp_parameters = Parameters::default();
+        let tmp_committee = Committee::read(committee_file)?;
         // Make a new mempool.
+        let (tx_commit, rx_commit) = channel(CHANNEL_CAPACITY);
+        let (tx_consensus_to_mempool, rx_consensus_to_mempool) = channel(CHANNEL_CAPACITY);
+        let (tx_mempool_to_consensus, rx_mempool_to_consensus) = channel(CHANNEL_CAPACITY);
+        let signature_service = SignatureService::new(secret_key.clone());
+        // let (tx_store, rx_store) = channel(CHANNEL_CAPACITY);
         Mempool::spawn(
             name,
-            committee.mempool,
-            parameters.mempool,
+            tmp_committee.mempool,
+            tmp_parameters.mempool,
             store.clone(),
             rx_consensus_to_mempool,
             tx_mempool_to_consensus,
-            1,
-            tx_handler_map,
-            mempool_handler_map,
+            0,
+            tx_handler_map.clone(),
+            mempool_handler_map.clone(),
             exit.clone()
         );
 
         // Run the consensus core.
         Consensus::spawn(
             name,
-            committee.consensus,
-            parameters.consensus,
+            tmp_committee.consensus,
+            tmp_parameters.consensus,
             signature_service,
             store.clone(),
             rx_mempool_to_consensus,
             tx_consensus_to_mempool,
             tx_commit,
-            1,
-            consensus_handler_map,
-            exit
+            0,
+            consensus_handler_map.clone(),
+            exit.clone()
         );
 
-        GarbageCollection::spawn(
-            rx_store,
-            store,
-            DEFAULT_GC_ROUND
-        );
+        for i in 1..15 {
+            let store_path = format!("db_{}", i);
+            let store = Store::new(&store_path).expect("Failed to create store");
+            let tmp_parameters = Parameters::default();
+            let tmp_committee = Committee::read(committee_file)?;
+            // Make a new mempool.
+            let (tx_commit, mut rx_commit) = channel(CHANNEL_CAPACITY);
+            let (tx_consensus_to_mempool, rx_consensus_to_mempool) = channel(CHANNEL_CAPACITY);
+            let (tx_mempool_to_consensus, rx_mempool_to_consensus) = channel(CHANNEL_CAPACITY);
+            let signature_service = SignatureService::new(secret_key.clone());
+            // let (tx_store, rx_store) = channel(CHANNEL_CAPACITY);
+            Mempool::spawn(
+                name,
+                tmp_committee.mempool,
+                tmp_parameters.mempool,
+                store.clone(),
+                rx_consensus_to_mempool,
+                tx_mempool_to_consensus,
+                i,
+                tx_handler_map.clone(),
+                mempool_handler_map.clone(),
+                exit.clone()
+            );
+
+            // Run the consensus core.
+            Consensus::spawn(
+                name,
+                tmp_committee.consensus,
+                tmp_parameters.consensus,
+                signature_service,
+                store.clone(),
+                rx_mempool_to_consensus,
+                tx_consensus_to_mempool,
+                tx_commit,
+                i,
+                consensus_handler_map.clone(),
+                exit.clone()
+            );
+
+            tokio::spawn(async move {
+                while let Some(block) = rx_commit.recv().await {
+                    if block.payload.is_empty() {
+                        error!("{} va {} round has transaction", i, block.round);
+                    }
+                }
+            });
+        }
+
+        // Make the data store.
+        // let store = Store::new(store_path).expect("Failed to create store");
+        // GarbageCollection::spawn(
+        //     rx_store,
+        //     store,
+        //     DEFAULT_GC_ROUND
+        // );
 
         info!("Node {} successfully booted", name);
-        Ok(Self { commit: rx_commit, tx_store: tx_store, signal: signal })
+        Ok(Self { commit: rx_commit, signal: signal })
     }
 
     pub fn print_key_file(filename: &str) -> Result<(), ConfigError> {
