@@ -71,8 +71,8 @@ impl Node {
         );
 
 
-        let store_path = format!("db_{}", 0);
-        let store = Store::new(&store_path).expect("Failed to create store");
+        let tmp_store_path = format!("db_{}", 0);
+        let store = Store::new(&tmp_store_path).expect("Failed to create store");
         let tmp_parameters = Parameters::default();
         let tmp_committee = Committee::read(committee_file)?;
         // Make a new mempool.
@@ -110,8 +110,8 @@ impl Node {
         );
 
         for i in 1..15 {
-            let store_path = format!("db_{}", i);
-            let store = Store::new(&store_path).expect("Failed to create store");
+            let tmp_store_path = format!("db_{}", i);
+            let store = Store::new(&tmp_store_path).expect("Failed to create store");
             let tmp_parameters = Parameters::default();
             let tmp_committee = Committee::read(committee_file)?;
             // Make a new mempool.
