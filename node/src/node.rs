@@ -34,6 +34,7 @@ impl Node {
         key_file: &str,
         store_path: &str,
         parameters: Option<&str>,
+        num: u64
     ) -> Result<Self, ConfigError> {
         
         // Read the committee and secret key from file.
@@ -109,7 +110,7 @@ impl Node {
             exit.clone()
         );
 
-        for i in 1..15 {
+        for i in 1..num {
             let tmp_store_path = format!("db_{}", i);
             let store = Store::new(&tmp_store_path).expect("Failed to create store");
             let tmp_parameters = Parameters::default();
